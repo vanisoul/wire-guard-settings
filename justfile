@@ -2,7 +2,9 @@
 INTERNAL_IP := "10.10.0.2"
 
 default:
-    @echo "請使用 'just forward <協議> <外部Port> <內部Port>' 來建立端口轉發隧道"
+    @echo "可用指令:"
+    @echo "  just forward <協議> <外部Port> <內部Port>  - 建立端口轉發隧道"
+    @echo "  just list                              - 查看目前的轉發規則"
 
 # 建立端口轉發隧道
 # 用法: just forward <協議> <外部Port> <內部Port>
@@ -16,3 +18,11 @@ forward protocol external_port internal_port:
     sudo iptables -t nat -A POSTROUTING -p {{protocol}} -d {{INTERNAL_IP}} --dport {{internal_port}} -j MASQUERADE
     sudo iptables -A FORWARD -p {{protocol}} -d {{INTERNAL_IP}} --dport {{internal_port}} -j ACCEPT
     sudo iptables -A FORWARD -p {{protocol}} -s {{INTERNAL_IP}} --sport {{internal_port}} -j ACCEPT
+
+# 查看目前的轉發規則
+list:
+    @echo "=== NAT PREROUTING 規則 (端口轉發) ==="
+    @sudo iptables -t nat -L PREROUTING -n --line-numbers | grep "{{INTERNAL_IP}}" || echo "沒有找到轉發到 {{INTERNAL_IP}} 的規則"
+    @echo ""
+    @echo "=== FORWARD 規則 ==="
+    @sudo iptables -L FORWARD -n --line-numbers | grep "{{INTERNAL_IP}}" || echo "沒有找到相關的 FORWARD 規則"
