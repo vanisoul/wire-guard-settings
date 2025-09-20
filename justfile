@@ -35,7 +35,7 @@ forward-range protocol port_range:
         echo "錯誤: Port區間格式必須是 開始Port:結束Port (例: 10000:11111)"; \
         exit 1; \
     fi
-    sudo iptables -t nat -A PREROUTING -p {{protocol}} --dport {{port_range}} -j DNAT --to-destination {{INTERNAL_IP}}
+    sudo iptables -t nat -A PREROUTING -p {{protocol}} --dport {{port_range}} -j DNAT --to-destination {{INTERNAL_IP}}:{{port_range}}
     sudo iptables -t nat -A POSTROUTING -p {{protocol}} -d {{INTERNAL_IP}} --dport {{port_range}} -j MASQUERADE
     sudo iptables -A FORWARD -p {{protocol}} -d {{INTERNAL_IP}} --dport {{port_range}} -j ACCEPT
     sudo iptables -A FORWARD -p {{protocol}} -s {{INTERNAL_IP}} --sport {{port_range}} -j ACCEPT
@@ -65,7 +65,7 @@ delete-range protocol port_range:
         echo "錯誤: Port區間格式必須是 開始Port:結束Port (例: 10000:11111)"; \
         exit 1; \
     fi
-    sudo iptables -t nat -D PREROUTING -p {{protocol}} --dport {{port_range}} -j DNAT --to-destination {{INTERNAL_IP}}
+    sudo iptables -t nat -D PREROUTING -p {{protocol}} --dport {{port_range}} -j DNAT --to-destination {{INTERNAL_IP}}:{{port_range}}
     sudo iptables -t nat -D POSTROUTING -p {{protocol}} -d {{INTERNAL_IP}} --dport {{port_range}} -j MASQUERADE
     sudo iptables -D FORWARD -p {{protocol}} -d {{INTERNAL_IP}} --dport {{port_range}} -j ACCEPT
     sudo iptables -D FORWARD -p {{protocol}} -s {{INTERNAL_IP}} --sport {{port_range}} -j ACCEPT
