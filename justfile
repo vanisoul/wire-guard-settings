@@ -4,6 +4,7 @@ INTERNAL_IP := "10.10.0.2"
 default:
     @echo "可用指令:"
     @echo "  just forward <協議> <外部Port> <內部Port>  - 建立端口轉發隧道"
+    @echo "  just delete <協議> <外部Port> <內部Port>   - 刪除端口轉發隧道"
     @echo "  just list                              - 查看目前的轉發規則"
 
 # 建立端口轉發隧道
@@ -18,6 +19,19 @@ forward protocol external_port internal_port:
     sudo iptables -t nat -A POSTROUTING -p {{protocol}} -d {{INTERNAL_IP}} --dport {{internal_port}} -j MASQUERADE
     sudo iptables -A FORWARD -p {{protocol}} -d {{INTERNAL_IP}} --dport {{internal_port}} -j ACCEPT
     sudo iptables -A FORWARD -p {{protocol}} -s {{INTERNAL_IP}} --sport {{internal_port}} -j ACCEPT
+
+# 刪除端口轉發隧道
+# 用法: just delete <協議> <外部Port> <內部Port>
+# 協議只能是 tcp 或 udp
+delete protocol external_port internal_port:
+    @if [ "{{protocol}}" != "tcp" ] && [ "{{protocol}}" != "udp" ]; then \
+        echo "錯誤: 協議必須是 tcp 或 udp"; \
+        exit 1; \
+    fi
+    sudo iptables -t nat -D PREROUTING -p {{protocol}} --dport {{external_port}} -j DNAT --to-destination {{INTERNAL_IP}}:{{internal_port}}
+    sudo iptables -t nat -D POSTROUTING -p {{protocol}} -d {{INTERNAL_IP}} --dport {{internal_port}} -j MASQUERADE
+    sudo iptables -D FORWARD -p {{protocol}} -d {{INTERNAL_IP}} --dport {{internal_port}} -j ACCEPT
+    sudo iptables -D FORWARD -p {{protocol}} -s {{INTERNAL_IP}} --sport {{internal_port}} -j ACCEPT
 
 # 查看目前的轉發規則
 list:
