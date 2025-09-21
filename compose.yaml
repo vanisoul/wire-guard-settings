@@ -25,7 +25,7 @@
       - VR_LOWER_FPS_WHEN_EMPTY_VALUE=5
       - VR_PASSWORD=363739
       - VR_SECURE=true
-      - VR_LIST_ON_EOS=false
+      - VR_LIST_ON_EOS=true
       - VR_LIST_ON_STEAM=true
       - VR_PRESET=StandardPvE
       - VR_DIFFICULTY_PRESET=Difficulty_Normal
