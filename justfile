@@ -73,10 +73,10 @@ delete-range protocol port_range:
 # 查看目前的轉發規則
 list:
     @echo "=== NAT PREROUTING 規則 (端口轉發) ==="
-    @sudo iptables -t nat -L PREROUTING -n --line-numbers | grep "{{INTERNAL_IP}}" || echo "沒有找到轉發到 {{INTERNAL_IP}} 的規則"
+    @sudo iptables -t nat -L PREROUTING -n -v --line-numbers | grep "{{INTERNAL_IP}}" || echo "沒有找到轉發到 {{INTERNAL_IP}} 的規則"
     @echo ""
     @echo "=== NAT POSTROUTING 規則 (地址偽裝) ==="
-    @sudo iptables -t nat -L POSTROUTING -n --line-numbers | grep "{{INTERNAL_IP}}" || echo "沒有找到相關的 POSTROUTING 規則"
+    @sudo iptables -t nat -L POSTROUTING -n -v --line-numbers | grep "{{INTERNAL_IP}}" || echo "沒有找到相關的 POSTROUTING 規則"
     @echo ""
     @echo "=== FORWARD 規則 ==="
-    @sudo iptables -L FORWARD -n --line-numbers | grep "{{INTERNAL_IP}}" || echo "沒有找到相關的 FORWARD 規則"
+    @sudo iptables -L FORWARD -n -v --line-numbers | grep "{{INTERNAL_IP}}" || echo "沒有找到相關的 FORWARD 規則"
