@@ -32,9 +32,5 @@
       - VR_SECURE=true
       - VR_ENABLE_RCON=true
       - VR_RCON_PASSWORD=363739
-      # game tweaks
-      - VR_CLAN_SIZE=10
-      - VR_GAME_MODE=PVE
-      # Port
       - VR_GAME_PORT=27015
       - VR_QUERY_PORT=27016
