@@ -1,0 +1,64 @@
+{
+  "GameDifficulty": 2,
+  "GameModeType": 0,
+  "RelicSpawnType": 1,
+  "CanLootEnemyContainers": false,
+  "TeleportBoundItems": false,
+  "DropTableModifier_General": 1.25,
+  "ClanSize": 20,
+  "DurabilityDrainModifier": 0.5,
+  "CastleDecayRateModifier": 0.0,
+  "CastleBloodEssenceDrainModifier": 0.5,
+  "ServantConvertRateModifier": 6.0,
+  "VBloodUnitSettings": [],
+  "UnlockedAchievements": [],
+  "UnlockedResearchs": [],
+  "GameTimeModifiers": {},
+  "VampireStatModifiers": {},
+  "UnitStatModifiers_Global": {
+    "PowerModifier": 1.4
+  },
+  "UnitStatModifiers_VBlood": {
+    "MaxHealthModifier": 1.25,
+    "PowerModifier": 1.7,
+    "LevelIncrease": 3
+  },
+  "EquipmentStatModifiers_Global": {},
+  "CastleStatModifiers_Global": {
+    "HeartLimits": {
+      "Level1": {
+        "HeightLimit": 4
+      },
+      "Level2": {
+        "HeightLimit": 4
+      },
+      "Level3": {
+        "HeightLimit": 4
+      },
+      "Level4": {
+        "HeightLimit": 4
+      },
+      "Level5": {
+        "ServantLimit": 20,
+        "HeightLimit": 4
+      }
+    },
+    "CastleLimit": 4
+  },
+  "PlayerInteractionSettings": {
+    "TimeZone": 5,
+    "VSPlayerWeekdayTime": {},
+    "VSPlayerWeekendTime": {},
+    "VSCastleWeekdayTime": {},
+    "VSCastleWeekendTime": {}
+  },
+  "TraderModifiers": {},
+  "WarEventGameSettings": {
+    "WeekdayTime": {},
+    "WeekendTime": {},
+    "ScalingPlayers1": {},
+    "ScalingPlayers2": {},
+    "ScalingPlayers3": {},
+    "ScalingPlayers4": {}
+  }
+}

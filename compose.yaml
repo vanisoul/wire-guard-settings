@@ -1,0 +1,40 @@
+﻿services:
+  vrising:
+    container_name: v-rising
+    image: mephi00/v-rising-wine:latest
+    restart: unless-stopped
+    network_mode: host
+    volumes:
+      - type: bind
+        source: ./saves
+        target: /saves
+      - type: bind
+        source: ./server
+        target: /home/steam/Steam/steamapps/common/VRisingDedicatedServer
+    environment:
+      # base server settings
+      - VR_NAME=WoWServer
+      - VR_ADDRESS=34.80.126.173
+      - VR_PASSWORD=363739
+      - VR_SAVE_NAME=WoW
+      - VR_DIFFICULTY_PRESET=Difficulty_Normal
+      - VR_SETTING_PRESET=StandardPvE
+      - VR_SAVE_INTERVAL=43200
+      - VR_SAVE_COUNT=28
+      - VR_RESET_DAYS_INTERVAL=0
+      - VR_MAX_ADMINS=4
+      - VR_MAX_USERS=40
+      - VR_HIDEIPADDRESS=false
+      - VR_LOWER_FPS_WHEN_EMPTY=false
+      - VR_LOWER_FPS_WHEN_EMPTY_VALUE=30
+      - VR_LIST_ON_STEAM=true
+      - VR_LIST_ON_EOS=false
+      - VR_SECURE=true
+      - VR_ENABLE_RCON=true
+      - VR_RCON_PASSWORD=363739
+      # game tweaks
+      - VR_CLAN_SIZE=10
+      - VR_GAME_MODE=PVE
+      # Port
+      - VR_GAME_PORT=27015
+      - VR_QUERY_PORT=27016
