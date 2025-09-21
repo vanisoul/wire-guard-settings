@@ -27,7 +27,7 @@
       - VR_SECURE=true
       - VR_LIST_ON_EOS=true
       - VR_LIST_ON_STEAM=true
-      - VR_PRESET=StandardPvE
+      # - VR_PRESET=StandardPvE
       - VR_DIFFICULTY_PRESET=Difficulty_Normal
       - VR_SAVE_NAME=WoW
       - VR_SAVE_COUNT=28
