@@ -72,14 +72,14 @@ delete-range protocol port_range:
 
 # 22 / 1820 不可轉
 auto-settings:
-    just forward tcp 80
-    just forward tcp 443
+    just forward tcp 80 80
+    just forward tcp 443 443
     just forward-range tcp 2000:60999
     just forward-range udp 2000:60999
 
 auto-remove:
-    just delete tcp 80
-    just delete tcp 443
+    just delete tcp 80 80
+    just delete tcp 443 443
     just delete-range tcp 2000:60999
     just delete-range udp 2000:60999
 
