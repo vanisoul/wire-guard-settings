@@ -70,6 +70,19 @@ delete-range protocol port_range:
     sudo iptables -D FORWARD -p {{protocol}} -d {{INTERNAL_IP}} --dport {{port_range}} -j ACCEPT
     sudo iptables -D FORWARD -p {{protocol}} -s {{INTERNAL_IP}} --sport {{port_range}} -j ACCEPT
 
+# 22 / 1820 不可轉
+auto-settings:
+    just forward tcp 80
+    just forward tcp 443
+    just forward-range tcp 2000:60999
+    just forward-range udp 2000:60999
+
+auto-remove:
+    just delete tcp 80
+    just delete tcp 443
+    just delete-range tcp 2000:60999
+    just delete-range udp 2000:60999
+
 # 查看目前的轉發規則
 list:
     @echo "=== NAT PREROUTING 規則 (端口轉發) ==="
