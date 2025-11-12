@@ -72,11 +72,13 @@ auto-settings:
     just forward tcp 443 172.22.88.50 443
     just forward tcp 27020 172.22.88.40 27020
     just forward-range udp 172.22.88.40 27015:27016
+    just forward-range udp 172.22.88.41 27050:27051
 
 auto-remove:
     just delete tcp 443 172.22.88.50 443
     just delete tcp 27020 172.22.88.40 27020
     just delete-range udp 172.22.88.40 27015:27016
+    just delete-range udp 172.22.88.41 27050:27051
 
 # 查看目前的轉發規則
 list internal_ip:
