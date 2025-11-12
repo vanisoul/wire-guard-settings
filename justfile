@@ -70,13 +70,13 @@ delete-range protocol internal_ip port_range:
 # 22 / 1820 不可轉
 auto-settings:
     just forward tcp 443 172.22.88.50 443
-    just forward tcp 27020 172.22.88.21 27020
-    just forward-range udp 172.22.88.21 27015:27016
+    just forward tcp 27020 172.22.88.40 27020
+    just forward-range udp 172.22.88.40 27015:27016
 
 auto-remove:
     just delete tcp 443 172.22.88.50 443
-    just delete tcp 27020 172.22.88.21 27020
-    just delete-range udp 172.22.88.21 27015:27016
+    just delete tcp 27020 172.22.88.40 27020
+    just delete-range udp 172.22.88.40 27015:27016
 
 # 查看目前的轉發規則
 list internal_ip:
