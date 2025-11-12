@@ -39,14 +39,3 @@ if [ $? -eq 0 ]; then
 else
   echo "❌ 啟動失敗，請檢查 docker log。"
 fi
-
-
-### 1️⃣ 允許 VPN Client 流量轉送至內網
-sudo iptables -A FORWARD -s 172.22.77.0/24 -d 172.22.88.0/24 -j ACCEPT
-sudo iptables -A FORWARD -s 172.22.88.0/24 -d 172.22.77.0/24 -j ACCEPT
-
-### 2️⃣ NAT：VPN Client 經 tun0（10.10.0.1）訪問內網時做 SNAT
-sudo iptables -t nat -A POSTROUTING -s 172.22.77.0/24 -o wg0 -j SNAT --to-source 10.10.0.1
-
-### 3️⃣ 若要讓 VPN Client 上外網（走 eth0）
-sudo iptables -t nat -A POSTROUTING -s 172.22.77.0/24 -o ens4 -j MASQUERADE
