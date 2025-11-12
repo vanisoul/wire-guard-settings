@@ -58,6 +58,3 @@ case "$1" in
     exit 1
     ;;
 esac
-
-
-# sudo route add -net 172.22.88.0/24 192.168.42.1
