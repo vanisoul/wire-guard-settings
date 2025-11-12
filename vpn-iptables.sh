@@ -8,7 +8,7 @@
 #   ./vpn-iptables.sh del     # 移除規則
 # -------------------------------------------------------
 
-VPN_NET="172.22.77.0/24"
+VPN_NET="192.168.42.0/24"
 LAN_NET="172.22.88.0/24"
 TUN_IF="wg0"      # 通往內網的介面
 TUN_IP="10.10.0.1"
@@ -18,8 +18,8 @@ add_rules() {
   echo "🚀 新增 VPN iptables 規則中..."
 
   # 允許 VPN ↔ 內網流量通行
-  iptables -A FORWARD -s "$VPN_NET" -d "$LAN_NET" -j ACCEPT
-  iptables -A FORWARD -s "$LAN_NET" -d "$VPN_NET" -j ACCEPT
+  iptables -I FORWARD 1 -s "$VPN_NET" -d "$LAN_NET" -j ACCEPT
+  iptables -I FORWARD 2 -s "$LAN_NET" -d "$VPN_NET" -j ACCEPT
 
   # NAT：VPN Client 經 wg0 進內網時 SNAT 成 10.10.0.1
   iptables -t nat -A POSTROUTING -s "$VPN_NET" -o "$TUN_IF" -j SNAT --to-source "$TUN_IP"
@@ -44,23 +44,19 @@ del_rules() {
   echo "✅ 移除完成"
 }
 
-save_rules() {
-  echo "💾 儲存目前規則..."
-  iptables-save > /etc/iptables/rules.v4
-  echo "✅ 已儲存至 /etc/iptables/rules.v4"
-}
 
 case "$1" in
   add)
     add_rules
-    save_rules
     ;;
   del)
     del_rules
-    save_rules
     ;;
   *)
     echo "用法: $0 {add|del}"
     exit 1
     ;;
 esac
+
+
+# sudo route add -net 172.22.88.0/24 192.168.42.1
