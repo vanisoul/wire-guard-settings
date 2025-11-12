@@ -21,14 +21,12 @@ echo ""
 docker run -d \
   --name ipsec-vpn-server \
   --restart=always \
+  --network host \
   --privileged \
   -e VPN_IPSEC_PSK="$VPN_IPSEC_PSK" \
   -e VPN_USER="$VPN_USER" \
   -e VPN_PASSWORD="$VPN_PASSWORD" \
-  -e VPN_CLIENT_NET='172.22.77.0/24' \
   -e VPN_CLIENT_DNS='8.8.8.8,8.8.4.4' \
-  -p 500:500/udp \
-  -p 4500:4500/udp \
   -v /lib/modules:/lib/modules:ro \
   hwdsl2/ipsec-vpn-server
 
