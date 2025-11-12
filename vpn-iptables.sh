@@ -16,6 +16,7 @@ WAN_IF="ens4"     # 外網出口介面
 
 add_rules() {
   echo "🚀 新增 VPN iptables 規則中..."
+  sudo sysctl -w net.ipv4.ip_forward=1
 
   # 允許 VPN ↔ 內網流量通行
   iptables -I FORWARD 1 -s "$VPN_NET" -d "$LAN_NET" -j ACCEPT
